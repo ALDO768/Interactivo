@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alineaciones de Fútbol Interactivo</title>
+<style>
+body {
+  background-color: #013a0b;
+  font-family: Arial, sans-serif;
+}
+#header {
+  background-color: #74e651;
+  border-radius: 10px;
+  padding: 5px;
+}
+h2 {
+  text-align: center;
+  color: black;
+  margin: 8px;
+}
+#seccion {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.barra {
+  padding: 10px;
+  margin: 5px;
+  background: rgb(1, 73, 16);
+  flex: 3;
+  border-radius: 40px;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+}
+.contenido {
+  padding: 10px;
+  border-radius: 10px;
+  background: rgb(251, 241, 100);
+  margin: 5px;
+  flex: 1 150px;
+}
+.subcontenido2 {
+  display: flex;
+  justify-content: center;
+}
+#resultado {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#footer {
+  background-color: white;
+  text-align: center;
+  padding-top: 10px;
+  border-radius: 10px;
+  display: flex;
+}
+.texto-rojo {
+  font-size: 40px;
+  font-weight: bold;
+  color: red;
+}
+#imagen-interactiva {
+  position: relative;
+  width: 900px;
+  height: 600px;
+  background-image: url('imagenes/Cancha-Fut.png');
+  background-size: cover;
+  border: 2px solid #000;
+  border-radius: 10px;
+}
+.hotspot {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  background-color: rgba(0, 0, 255, 0.5);
+  border-radius: 50%;
+  cursor: pointer;
+}
+.text-hotspot {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-weight: bold;
+}
+#instrucciones, #prueba {
+  flex: 1;
+  cursor: pointer;
+}
+</style>
+</head>
+
+<body>
+<div id="header">
+  <h2>Bienvenido a “Alineaciones del Fútbol”</h2>
+</div>
+
+<div id="seccion">
+  <div class="barra">
+    <div id="imagen-interactiva">
+      <!-- Portero -->
+      <div id="hotspot1" class="hotspot" style="top: 480px; left: 430px;"><span class="text-hotspot">1</span></div>
+      <!-- Defensas -->
+      <div id="hotspot2" class="hotspot" style="top: 400px; left: 650px;"><span class="text-hotspot">2</span></div>
+      <div id="hotspot3" class="hotspot" style="top: 380px; left: 520px;"><span class="text-hotspot">3</span></div>
+      <div id="hotspot4" class="hotspot" style="top: 380px; left: 350px;"><span class="text-hotspot">4</span></div>
+      <div id="hotspot5" class="hotspot" style="top: 400px; left: 230px;"><span class="text-hotspot">5</span></div>
+      <!-- Medios -->
+      <div id="hotspot6" class="hotspot" style="top: 280px; left: 580px;"><span class="text-hotspot">6</span></div>
+      <div id="hotspot7" class="hotspot" style="top: 280px; left: 320px;"><span class="text-hotspot">7</span></div>
+      <div id="hotspot8" class="hotspot" style="top: 230px; left: 700px;"><span class="text-hotspot">8</span></div>
+      <div id="hotspot9" class="hotspot" style="top: 230px; left: 200px;"><span class="text-hotspot">9</span></div>
+      <!-- Delanteros -->
+      <div id="hotspot10" class="hotspot" style="top: 130px; left: 400px;"><span class="text-hotspot">10</span></div>
+      <div id="hotspot11" class="hotspot" style="top: 130px; left: 500px;"><span class="text-hotspot">11</span></div>
+    </div>
+  </div>
+
+  <div class="contenido">
+    <div class="subcontenido1">
+      <h2 id="titulo-info">Instrucciones</h2>
+      <p id="texto-info">
+        Haz clic en cada jugador para conocer su posición en el campo y su función. 
+        Luego realiza el test de conocimientos sobre alineaciones de fútbol.
+      </p>
+    </div>
+    <div class="subcontenido2">
+      <img id="imagen-info" src="imagenes/hotspot-cursor.png" alt="Imagen info" style="width:100%; height:100%; border-radius:10px;">
+    </div>
+    <div id="resultado">
+      <h2>Tu resultado:</h2>
+      <span id="calif" class="texto-rojo">0/10</span>
+    </div>
+  </div>
+</div>
+
+<div id="footer">
+  <div id="instrucciones"><img width="100px" src="/imagenes/hotspot-cursor.png"></div>
+  <div id="prueba"><img width="100px" src="/imagenes/test.avif"></div>
+</div>
+
+<script>
+let puntaje = 0;
+function mostrarInfo(titulo, texto, imagen) {
+  document.getElementById('titulo-info').textContent = titulo;
+  document.getElementById('texto-info').textContent = texto;
+  document.getElementById('imagen-info').src = imagen;
+}
+
+// Funciones por posición
+document.getElementById('hotspot1').onclick = ()=>mostrarInfo('Portero','Defiende la portería e intenta evitar goles del rival.','imagenesfut/portero.png');
+document.getElementById('hotspot2').onclick = ()=>mostrarInfo('Lateral derecho','Apoya la defensa y sube por la banda derecha.','imagenesfut/lateralder.png');
+document.getElementById('hotspot3').onclick = ()=>mostrarInfo('Central derecho','Defiende el área y despeja balones aéreos.','imagenesfut/centralder.png');
+document.getElementById('hotspot4').onclick = ()=>mostrarInfo('Central izquierdo','Complementa al central derecho y marca atacantes.','imagenesfut/centralizq.png');
+document.getElementById('hotspot5').onclick = ()=>mostrarInfo('Lateral izquierdo','Defiende y apoya por la banda izquierda.','imagenesfut/lateralizq.png');
+document.getElementById('hotspot6').onclick = ()=>mostrarInfo('Contención derecha','Recupera balones y corta ataques rivales.','imagenesfut/contencionder.png');
+document.getElementById('hotspot7').onclick = ()=>mostrarInfo('Contención izquierda','Ayuda en la salida y cubre el medio campo.','imagenesfut/contencionizq.png');
+document.getElementById('hotspot8').onclick = ()=>mostrarInfo('Extremo derecho','Ataca por la banda derecha y manda centros.','imagenesfut/extremoder.png');
+document.getElementById('hotspot9').onclick = ()=>mostrarInfo('Extremo izquierdo','Ataca por la izquierda y genera oportunidades.','imagenesfut/extremoizq.png');
+document.getElementById('hotspot10').onclick = ()=>mostrarInfo('Delantero derecho','Su función es anotar goles y presionar la defensa.','imagenesfut/delantero.png');
+document.getElementById('hotspot11').onclick = ()=>mostrarInfo('Delantero izquierdo','Acompaña el ataque y busca marcar goles.','imagenesfut/delantero2.png');
+
+document.getElementById('instrucciones').onclick = function(){
+  mostrarInfo('Instrucciones','Haz clic en cada jugador para conocer su posición y luego realiza el test.','imagenesfut/hotspot-cursor.png');
+};
+
+document.getElementById('prueba').onclick = function(){
+  alert("Bienvenido a la prueba de conocimientos ⚽");
+  puntaje = 0;
+  const preguntas = [
+    ["¿Qué jugador puede usar las manos dentro del campo?", "portero"],
+    ["¿Qué jugador se ubica a la derecha de la defensa?", "lateral derecho"],
+    ["¿Qué jugador central cubre la zona izquierda?", "central izquierdo"],
+    ["¿Qué jugador ayuda a recuperar balones en el medio campo?", "contención"],
+    ["¿Qué jugador recorre la banda derecha para atacar?", "extremo derecho"],
+    ["¿Qué jugador recorre la banda izquierda para atacar?", "extremo izquierdo"],
+    ["¿Qué jugador lidera el ataque principal?", "delantero"],
+    ["¿Qué jugador se encuentra más cerca del portero rival?", "delantero"],
+    ["¿Qué jugador protege la portería?", "portero"],
+    ["¿Qué línea del campo tiene cuatro jugadores defensivos?", "defensa"]
+  ];
+  for(let i=0;i<preguntas.length;i++){
+    let r = prompt(preguntas[i][0]);
+    if(r && r.trim().toLowerCase().includes(preguntas[i][1])){
+      alert("✅ Correcto");
+      puntaje++;
+    } else {
+      alert("❌ Incorrecto. Respuesta: " + preguntas[i][1]);
+    }
+  }
+  alert("Tu puntuación final: " + puntaje + "/10");
+  document.getElementById('calif').textContent = puntaje + "/10";
+};
+</script>
+</body>
+</html>
