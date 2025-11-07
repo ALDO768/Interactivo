@@ -104,17 +104,17 @@ h2 {
     <div id="imagen-interactiva">
       <!-- Portero -->
       <div id="hotspot1" class="hotspot" style="top: 480px; left: 430px;"><span class="text-hotspot">1</span></div>
-      <!-- Defensas -->
+    
       <div id="hotspot2" class="hotspot" style="top: 400px; left: 650px;"><span class="text-hotspot">2</span></div>
       <div id="hotspot3" class="hotspot" style="top: 380px; left: 520px;"><span class="text-hotspot">3</span></div>
       <div id="hotspot4" class="hotspot" style="top: 380px; left: 350px;"><span class="text-hotspot">4</span></div>
       <div id="hotspot5" class="hotspot" style="top: 400px; left: 230px;"><span class="text-hotspot">5</span></div>
-      <!-- Medios -->
+      
       <div id="hotspot6" class="hotspot" style="top: 280px; left: 580px;"><span class="text-hotspot">6</span></div>
       <div id="hotspot7" class="hotspot" style="top: 280px; left: 320px;"><span class="text-hotspot">7</span></div>
       <div id="hotspot8" class="hotspot" style="top: 230px; left: 700px;"><span class="text-hotspot">8</span></div>
       <div id="hotspot9" class="hotspot" style="top: 230px; left: 200px;"><span class="text-hotspot">9</span></div>
-      <!-- Delanteros -->
+  
       <div id="hotspot10" class="hotspot" style="top: 130px; left: 400px;"><span class="text-hotspot">10</span></div>
       <div id="hotspot11" class="hotspot" style="top: 130px; left: 500px;"><span class="text-hotspot">11</span></div>
     </div>
@@ -151,7 +151,6 @@ function mostrarInfo(titulo, texto, imagen) {
   document.getElementById('imagen-info').src = imagen;
 }
 
-// Funciones por posición
 document.getElementById('hotspot1').onclick = ()=>mostrarInfo('Portero','Defiende la portería e intenta evitar goles del rival.','imagenesfut/portero.png');
 document.getElementById('hotspot2').onclick = ()=>mostrarInfo('Lateral derecho','Apoya la defensa y sube por la banda derecha.','imagenesfut/lateralder.png');
 document.getElementById('hotspot3').onclick = ()=>mostrarInfo('Central derecho','Defiende el área y despeja balones aéreos.','imagenesfut/centralder.png');
