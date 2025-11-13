@@ -162,6 +162,7 @@ document.getElementById('hotspot9').onclick = ()=>mostrarInfo('Extremo izquierdo
 document.getElementById('hotspot10').onclick = ()=>mostrarInfo('Delantero derecho','Su función es anotar goles y presionar la defensa.','imagenesfut/delantero.png');
 document.getElementById('hotspot11').onclick = ()=>mostrarInfo('Delantero izquierdo','Acompaña el ataque y busca marcar goles.','imagenesfut/delantero2.png');
 
+
 document.getElementById('instrucciones').onclick = function(){
   mostrarInfo('Instrucciones','Haz clic en cada jugador para conocer su posición y luego realiza el test.','imagenesfut/hotspot-cursor.png');
 };
@@ -180,6 +181,7 @@ document.getElementById('prueba').onclick = function(){
     ["¿Qué jugador se encuentra más cerca del portero rival?", "delantero"],
     ["¿Qué jugador protege la portería?", "portero"],
     ["¿Qué línea del campo tiene cuatro jugadores defensivos?", "defensa"]
+    ["¿Quien es el mejor jugador de la historia?", "cristiano ronaldo"]
   ];
   for(let i=0;i<preguntas.length;i++){
     let r = prompt(preguntas[i][0]);
@@ -190,7 +192,7 @@ document.getElementById('prueba').onclick = function(){
       alert("❌ Incorrecto. Respuesta: " + preguntas[i][1]);
     }
   }
-  alert("Tu puntuación final: " + puntaje + "/10");
+  alert("Tu puntuación final: " + puntaje + "/11");
   document.getElementById('calif').textContent = puntaje + "/10";
 };
 </script>
