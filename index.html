@@ -79,6 +79,11 @@ h2 {
   border-radius: 50%;
   cursor: pointer;
 }
+.hotspot:hover {
+  transform: scale(1.2);
+  background-color: rgba(255, 0, 0, 0.7);
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+}
 .text-hotspot {
   position: absolute;
   top: 50%;
@@ -87,9 +92,33 @@ h2 {
   color: white;
   font-weight: bold;
 }
-#instrucciones, #prueba {
+#instrucciones, #prueba , #libro-visitas {
   flex: 1;
   cursor: pointer;
+  transition: transform 0.3s;
+}
+#instrucciones:hover, #prueba:hover, #libro-visitas:hover {
+  transform: scale(1.05);
+}
+#visitas-contenedor {
+  max-height: 300px;
+  overflow-y: auto;
+  margin-top: 10px;
+  padding: 10px;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 5px;
+}
+.visita-item {
+  border-bottom: 1px solid #ccc;
+  padding: 8px 0;
+}
+.visita-nombre {
+  font-weight: bold;
+  color: #013a0b;
+}
+.visita-comentario {
+  color: #333;
+  font-size: 14px;
 }
 </style>
 </head>
@@ -130,6 +159,21 @@ h2 {
     <div class="subcontenido2">
       <img id="imagen-info" src="imagenes/hotspot-cursor.png" alt="Imagen info" style="width:50%; height:50%; border-radius:10px;">
     </div>
+
+<div id="libro-visitas-seccion">
+      <h3>Libro de Visitas</h3>
+      <div id="visitas-contenedor">
+
+        <p id="sin-visitas">No hay visitas registradas aún.</p>
+      </div>
+      
+      <div style="margin-top: 15px;">
+        <button id="btn-agregar-visita" style="background-color: #74e651; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer; font-weight: bold;">
+          ✍️ Agregar mi comentario
+        </button>
+      </div>
+    </div>
+
     <div id="resultado">
       <h2>Tu resultado:</h2>
       <span id="calif" class="texto-rojo">0/11</span>
@@ -140,10 +184,31 @@ h2 {
 <div id="footer">
   <div id="instrucciones"><img width="100px" src="imagenes/hotspot-cursor.png"></div>
   <div id="prueba"><img width="100px" src="imagenes/examen.avif"></div>
+    <div id="libro-visitas"><img width="100px" src="imagenes/libro.webp" alt="Libro de visitas"></div>
+</div>
+
+<div id="modal-visita" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background-color:rgba(0,0,0,0.7); z-index:1000; justify-content:center; align-items:center;">
+  <div style="background-color:white; padding:20px; border-radius:10px; width:90%; max-width:500px;">
+    <h2>Agregar al Libro de Visitas</h2>
+    <div style="margin-bottom:15px;">
+      <label style="display:block; margin-bottom:5px; font-weight:bold;">Nombre:</label>
+      <input type="text" id="nombre-visita" style="width:100%; padding:8px; border:1px solid #ccc; border-radius:5px;">
+    </div>
+    <div style="margin-bottom:15px;">
+      <label style="display:block; margin-bottom:5px; font-weight:bold;">Comentario:</label>
+      <textarea id="comentario-visita" style="width:100%; padding:8px; border:1px solid #ccc; border-radius:5px; height:100px;"></textarea>
+    </div>
+    <div style="display:flex; gap:10px; justify-content:flex-end;">
+      <button id="btn-cancelar" style="background-color:#ccc; border:none; padding:8px 15px; border-radius:5px; cursor:pointer;">Cancelar</button>
+      <button id="btn-guardar" style="background-color:#74e651; border:none; padding:8px 15px; border-radius:5px; cursor:pointer; font-weight:bold;">Guardar</button>
+    </div>
+  </div>
 </div>
 
 <script>
 let puntaje = 0;
+let visitas = [];
+
 function mostrarInfo(titulo, texto, imagen) {
   document.getElementById('titulo-info').textContent = titulo;
   document.getElementById('texto-info').textContent = texto;
@@ -195,6 +260,23 @@ document.getElementById('prueba').onclick = function(){
   alert("Tu puntuación final: " + puntaje + "/11");
   document.getElementById('calif').textContent = puntaje + "/11";
 };
+
+document.getElementById('libro-visitas').onclick = function() {
+  mostrarInfo('Libro de Visitas', 'Aquí puedes ver los comentarios de otros visitantes y agregar el tuyo.', 'imagenes/libro.png');
+  cargarVisitas();
+};
+
+function mostrarVisitas() {
+  const contenedor = document.getElementById('visitas-contenedor');
+  const sinVisitas = document.getElementById('sin-visitas');
+  
+  if (visitas.length === 0) {
+    if (!sinVisitas) {
+      contenedor.innerHTML = '<p id="sin-visitas">No hay visitas registradas aún.</p>';
+    }
+    return;
+  }
+
 </script>
 </body>
 </html>
