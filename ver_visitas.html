@@ -143,18 +143,17 @@
     </div>
 
     <script>
-        // Cargar visitas al cargar la página
         document.addEventListener('DOMContentLoaded', cargarTodasLasVisitas);
         
         function cargarTodasLasVisitas() {
-            // Intentar cargar desde el servidor PHP
+
             fetch('obtener_visitas.php')
                 .then(response => response.json())
                 .then(data => {
                     if (data.success && data.visitas) {
                         mostrarTodasLasVisitas(data.visitas);
                     } else {
-                        // Si falla el servidor, intentar cargar de localStorage
+
                         cargarVisitasLocalStorage();
                     }
                 })
@@ -187,7 +186,6 @@
                 return;
             }
             
-            // Ordenar por fecha (más recientes primero)
             visitas.sort((a, b) => new Date(b.fecha) - new Date(a.fecha));
             
             contador.textContent = `Total de visitas: ${visitas.length}`;

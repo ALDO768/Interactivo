@@ -5,53 +5,49 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulario de Registro - Alineaciones de Fútbol</title>
     <style>
-        * {
-            box-sizing: border-box;
-        }
-
         body {
             background-color: #013a0b;
             font-family: Arial, sans-serif;
             padding: 20px;
         }
-
+        
         .contenedor {
             max-width: 600px;
             margin: 0 auto;
         }
-
+        
         .encabezado {
             background-color: #74e651;
             border-radius: 10px;
             padding: 20px;
             margin-bottom: 20px;
         }
-
+        
         h1 {
             text-align: center;
             color: black;
             margin: 0;
         }
-
+        
         .formulario {
             background-color: rgb(1, 73, 16);
             padding: 20px;
             border-radius: 10px;
             margin-bottom: 20px;
         }
-
+        
         .campo {
             margin-bottom: 15px;
         }
-
+        
         label {
             display: block;
             color: #74e651;
             font-weight: bold;
             margin-bottom: 5px;
         }
-
-        input, select, textarea {
+        
+        input, textarea {
             width: 100%;
             padding: 10px;
             border: 2px solid #74e651;
@@ -60,41 +56,24 @@
             font-size: 14px;
             font-family: Arial, sans-serif;
         }
-
+        
         textarea {
             min-height: 80px;
             resize: vertical;
         }
-
-        input:focus, select:focus, textarea:focus {
+        
+        input:focus, textarea:focus {
             outline: none;
             background-color: white;
             border-color: white;
         }
-
-        .opciones {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .opcion {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            color: #74e651;
-        }
-
-        .opcion input {
-            width: auto;
-        }
-
+        
         .botones {
             display: flex;
             gap: 10px;
             justify-content: center;
         }
-
+        
         button {
             background-color: #74e651;
             color: black;
@@ -105,11 +84,11 @@
             font-weight: bold;
             cursor: pointer;
         }
-
+        
         button:hover {
             background-color: #5cb840;
         }
-
+        
         .pie {
             background-color: white;
             text-align: center;
@@ -118,7 +97,7 @@
             color: #013a0b;
             font-weight: bold;
         }
-
+        
         .exito {
             display: none;
             background-color: #74e651;
@@ -129,32 +108,59 @@
             text-align: center;
             font-weight: bold;
         }
+        
+        .error {
+            display: none;
+            background-color: #ff6b6b;
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            text-align: center;
+            font-weight: bold;
+        }
+        
+        .btn-volver {
+            text-decoration: none;
+            color: #013a0b;
+            font-weight: bold;
+            padding: 10px 20px;
+            background-color: #74e651;
+            border-radius: 5px;
+            display: inline-block;
+            margin-top: 10px;
+        }
+        
+        .btn-volver:hover {
+            background-color: #5cb840;
+        }
     </style>
 </head>
 <body>
     <div class="contenedor">
         <div class="encabezado">
-            <h1>Registro de Jugador de Fútbol ⚽</h1>
+            <h1>Deja tu Comentario ⚽</h1>
         </div>
 
         <div id="exito" class="exito">
-            ¡Registro completado exitosamente!
+            ¡Gracias! Tu comentario ha sido guardado.
+        </div>
+
+        <div id="error" class="error">
+            Error: Por favor, llena todos los campos.
         </div>
 
         <form class="formulario" id="miForm">
-            <!-- Nombre -->
             <div class="campo">
                 <label for="nombre">Nombre *</label>
                 <input type="text" id="nombre" required>
             </div>
 
-            <!-- Comentario -->
             <div class="campo">
                 <label for="comentario">Comentario *</label>
                 <textarea id="comentario" required></textarea>
             </div>
 
-            <!-- Botones -->
             <div class="botones">
                 <button type="submit">Enviar</button>
                 <button type="reset">Limpiar</button>
@@ -162,10 +168,54 @@
         </form>
 
         <div class="pie">
-            Alineaciones del Fútbol ⚽
+            <a href="index.html" class="btn-volver">← Volver al Interactivo</a>
         </div>
     </div>
 
-
+    <script>
+        document.getElementById('miForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const nombre = document.getElementById('nombre').value.trim();
+            const comentario = document.getElementById('comentario').value.trim();
+            
+            if(!nombre || !comentario) {
+                document.getElementById('error').style.display = 'block';
+                document.getElementById('exito').style.display = 'none';
+                return;
+            }
+            
+            const nuevaVisita = {
+                nombre: nombre,
+                comentario: comentario,
+                fecha: new Date().toISOString()
+            };
+            
+            guardarVisita(nuevaVisita);
+            
+            document.getElementById('exito').style.display = 'block';
+            document.getElementById('error').style.display = 'none';
+            
+            document.getElementById('miForm').reset();
+            
+            setTimeout(function() {
+                window.location.href = 'index.html';
+            }, 2000);
+        });
+        
+        function guardarVisita(nuevaVisita) {
+            let visitas = localStorage.getItem('visitasFutbol');
+            
+            if(visitas) {
+                visitas = JSON.parse(visitas);
+            } else {
+                visitas = [];
+            }
+            
+            visitas.push(nuevaVisita);
+            
+            localStorage.setItem('visitasFutbol', JSON.stringify(visitas));
+        }
+    </script>
 </body>
 </html>
