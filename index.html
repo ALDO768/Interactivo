@@ -266,36 +266,6 @@ document.getElementById('btn-agregar-visita').onclick = function() {
 document.getElementById('btn-ver-todas').onclick = function() {
   window.location.href = 'ver_visitas.html';
 };
-
-function cargarVisitas() {
-  const visitasGuardadas = localStorage.getItem('visitasFutbol');
-  
-  if(visitasGuardadas) {
-    visitas = JSON.parse(visitasGuardadas);
-    mostrarVisitas();
-  } else {
-    visitas = [];
-    mostrarVisitas();
-  }
-}
-
-function mostrarVisitas() {
-  const contenedor = document.getElementById('visitas-contenedor');
-  const sinVisitas = document.getElementById('sin-visitas');
-  
-  if(visitas.length === 0) {
-    if(!sinVisitas) {
-      contenedor.innerHTML = '<p id="sin-visitas">No hay visitas registradas aún.</p>';
-    }
-    return;
-  }
-  
-  if(sinVisitas) {
-    sinVisitas.remove();
-  }
-  
-}
-cargarVisitas();
 </script>
 </body>
 </html>
