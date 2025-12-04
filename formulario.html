@@ -150,19 +150,19 @@
             Error: Por favor, llena todos los campos.
         </div>
 
-        <form class="formulario" id="miForm">
+        <form method="post" action="procesar.php" class="formulario" id="miForm">
             <div class="campo">
                 <label for="nombre">Nombre *</label>
-                <input type="text" id="nombre" required>
+                <input type="text" id="campoNombre" required>
             </div>
 
             <div class="campo">
                 <label for="comentario">Comentario *</label>
-                <textarea id="comentario" required></textarea>
+                <textarea id="campoComentario" required></textarea>
             </div>
 
             <div class="botones">
-                <button type="submit">Enviar</button>
+                <button type="submit" value="Enviar" >Enviar</button>
                 <button type="reset">Limpiar</button>
             </div>
         </form>
@@ -171,51 +171,5 @@
             <a href="index.html" class="btn-volver">← Volver al Interactivo</a>
         </div>
     </div>
-
-    <script>
-        document.getElementById('miForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const nombre = document.getElementById('nombre').value.trim();
-            const comentario = document.getElementById('comentario').value.trim();
-            
-            if(!nombre || !comentario) {
-                document.getElementById('error').style.display = 'block';
-                document.getElementById('exito').style.display = 'none';
-                return;
-            }
-            
-            const nuevaVisita = {
-                nombre: nombre,
-                comentario: comentario,
-                fecha: new Date().toISOString()
-            };
-            
-            guardarVisita(nuevaVisita);
-            
-            document.getElementById('exito').style.display = 'block';
-            document.getElementById('error').style.display = 'none';
-            
-            document.getElementById('miForm').reset();
-            
-            setTimeout(function() {
-                window.location.href = 'index.html';
-            }, 2000);
-        });
-        
-        function guardarVisita(nuevaVisita) {
-            let visitas = localStorage.getItem('visitasFutbol');
-            
-            if(visitas) {
-                visitas = JSON.parse(visitas);
-            } else {
-                visitas = [];
-            }
-            
-            visitas.push(nuevaVisita);
-            
-            localStorage.setItem('visitasFutbol', JSON.stringify(visitas));
-        }
-    </script>
 </body>
 </html>
